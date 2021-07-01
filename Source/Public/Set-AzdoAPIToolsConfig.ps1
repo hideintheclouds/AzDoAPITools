@@ -27,6 +27,7 @@ function Set-AzdoAPIToolsConfig {
                     
                     $matchingobject.Organization = $config.Organization
                     $matchingobject.PAT = $config.PAT
+                    $matchingobject.collectionUrl = $config.collectionUrl
 
                     $OutConfig = $existingconfig | ConvertTo-Json -Depth 3
 

@@ -15,14 +15,15 @@ function Get-AzdoAPIURL {
         
        $profile = Get-AzdoAPIToolsProfile -profilename $profilename
        $subdomain = $profile.Organization
+       $baseUrl = If ([string]::IsNullOrWhiteSpace($profile.collectionUrl)) {'dev.azure.com'} Else {$profile.collectionurl}
        
        $sb = New-Object System.Text.StringBuilder
  
-       $sb.Append('Https://') | Out-Null
+       $sb.Append('https://') | Out-Null
        if($area -eq 'Release'){
           $sb.Append('vsrm.') | Out-Null
        }
-       $sb.Append('dev.azure.com') | Out-Null
+       $sb.Append($baseUrl) | Out-Null
        $sb.Append("/$subdomain") | Out-Null
        if ($projectname) {
          $sb.Append("/$projectname") | Out-Null
